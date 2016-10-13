@@ -1,5 +1,6 @@
 import os
 import urllib.request
+from urllib.request import urlretrieve
 from bs4 import BeautifulSoup
 
 URL = 'http://www.nandomuzi.net/Dropbox/clienti/springsummer2017/'
@@ -35,7 +36,13 @@ def get_images(html):
     return result
     
 def save(data):
-    pass
+    for i, item in enumerate(data):
+        path = os.path.join(OUTPUT_DIR, item['sku']) 
+        if not os.path.exists(path):
+            os.makedirs(path)
+        for image in item['images']:
+            file_to_save = image.rsplit('/')[2]
+            urlretrieve(URL + image, os.path.join(path, file_to_save))
 
 def main():
     parse(get_html(URL))
