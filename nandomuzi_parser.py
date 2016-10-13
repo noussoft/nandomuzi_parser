@@ -14,7 +14,6 @@ def parse(html):
     soup = BeautifulSoup(html, "html.parser")
     shoes_list = soup.find('ul', class_="shoes")
     items = shoes_list.find_all('li')
-    
     result = []
     for i, item in enumerate(items):
         links = item.find_all('a')
@@ -24,18 +23,15 @@ def parse(html):
             'small_image': links[0].img['src'],
             'sku': links[1].text
         })
-
     return result
 
 def get_images(html):
     soup = BeautifulSoup(html, "html.parser")
     image_list = soup.find('div', class_="blocco_immagini")
     image_links = image_list.find_all('a')
-
     result = []
     for link in image_links:
         result.append(link['href'].split("=")[1])
-
     return result
     
 def save(data):
