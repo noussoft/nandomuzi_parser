@@ -45,7 +45,7 @@ def save(data):
             urlretrieve(URL + image, os.path.join(path, file_to_save))
 
 def main():
-    parse(get_html(URL))
+    save(parse(get_html(URL)))
 
 if __name__ == '__main__':
     main()
