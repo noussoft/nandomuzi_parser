@@ -28,7 +28,15 @@ def parse(html):
     return result
 
 def get_images(html):
-    pass
+    soup = BeautifulSoup(html, "html.parser")
+    image_list = soup.find('div', class_="blocco_immagini")
+    image_links = image_list.find_all('a')
+
+    result = []
+    for link in image_links:
+        result.append(link['href'].split("=")[1])
+
+    return result
     
 def save(data):
     pass
